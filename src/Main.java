@@ -1,11 +1,31 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        cleanWordList();
+        //cleanWordList();
+        HashSet<String> usedWords = new HashSet<>();
+        try{
+            Scanner fileScanner = new Scanner(new FileReader("src/CleanWordList.txt"));
+            while(fileScanner.hasNext()){
+                usedWords.add(fileScanner.nextLine().toUpperCase());
+            }
+        }catch(IOException e) {
+            System.err.println("Error occurred while reading the file: " + e.getMessage());
+            return;
+        }
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("What Is Your Starter Word? ");
+        String starterWord = userInput.nextLine().toUpperCase();
+        if(usedWords.contains(starterWord)){
+            System.out.print("Sorry, It Appears That " + starterWord + " Has Already Been Used As A Wordle");
+        }else{
+            System.out.print("You're Good To Go, " + starterWord + " Has Not Yet Been Used As A Wordle");
+        }
+        userInput.close();
     }
 
     public static void cleanWordList() {
