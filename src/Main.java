@@ -1,8 +1,5 @@
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,11 +17,13 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         System.out.print("What Is Your Starter Word? ");
         String starterWord = userInput.nextLine().toUpperCase();
-        if(usedWords.contains(starterWord)){
-            System.out.print("Sorry, It Appears That " + starterWord + " Has Already Been Used As A Wordle");
-        }else{
-            System.out.print("You're Good To Go, " + starterWord + " Has Not Yet Been Used As A Wordle");
+
+        while(usedWords.contains(starterWord)){
+            System.out.println("Sorry, It Appears That " + starterWord + " Has Already Been Used As A Wordle");
+            System.out.print("Enter Your New Starter Word: ");
+            starterWord = userInput.nextLine().toUpperCase();
         }
+        System.out.print("You're Good To Go, " + starterWord + " Has Not Yet Been Used As A Wordle");
         userInput.close();
     }
 
